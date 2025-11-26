@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horse Racing Game - Trò chơi Đua Ngựa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏇 Horse Racing Game - Trò chơi Đua Ngựa 🏇</h1>
+
+    <div id="lobby-view">
+        <div class="card">
+            <h2>Lobby - Sảnh chờ</h2>
+            <input type="text" id="playerName" placeholder="Enter your name / Nhập tên của bạn..." class="input-lg">
+            <div class="lobby-actions">
+                <div class="action-group">
+                    <h3>Create New Room - Tạo phòng mới</h3>
+                    <p>You will be Admin / Bạn sẽ là Quản trị viên</p>
+                    <button onclick="createRoom()" class="btn btn-blue">Create Room / Tạo Phòng</button>
+                </div>
+                <div class="divider">OR - HOẶC</div>
+                <div class="action-group">
+                    <h3>Join Existing Room - Vào phòng có sẵn</h3>
+                    <input type="number" id="roomIdInput" placeholder="Enter Room ID / Nhập Mã Phòng (VD: 1234)">
+                    <button onclick="joinRoom()" class="btn btn-green">Join Room / Vào Phòng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-view" class="hidden">
+        <div class="room-info">
+            <span>Room / Phòng: <strong id="displayRoomId">...</strong></span>
+            <span>Admin: <strong id="displayAdmin">...</strong></span>
+            <span>You are / Bạn là: <strong id="displayMe">...</strong></span>
+        </div>
+
+        <div id="admin-panel" class="admin-panel hidden">
+            <h3>👑 Admin Controls - Bảng điều khiển</h3>
+            <div class="input-group">
+                <label for="raceDuration">Race Duration (seconds) / Thời gian đua (giây):</label>
+                <input type="number" id="raceDuration" value="10" min="5" max="60">
+            </div>
+            <div class="button-group">
+                <button onclick="startRace()" class="btn btn-green">🏁 START RACE / BẮT ĐẦU ĐUA</button>
+                <button onclick="resetGame()" class="btn btn-red">🔄 RESET GAME / THIẾT LẬP LẠI</button>
+            </div>
+        </div>
+
+        <div id="selection-area">
+            <h3>Choose Your Horse - Chọn ngựa của bạn</h3>
+            <div class="selection-info">
+                <p>⚠️ Each player can only choose 1 horse / Mỗi người chơi chỉ được chọn 1 ngựa</p>
+            </div>
+            <div class="grid-container" id="horseGrid"></div>
+        </div>
+
+        <div id="track-area" class="hidden">
+            <h3>Race Track - Đường đua</h3>
+            <div class="track-container" id="trackContainer"></div>
+        </div>
+
+        <div id="player-actions" class="player-actions">
+            <button onclick="leaveRoom()" class="btn btn-gray">← Leave Room / Rời phòng</button>
+            <button onclick="deselectHorse()" class="btn btn-orange" id="deselectBtn" style="display: none;">
+                ❌ Deselect Horse / Hủy chọn ngựa
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="winnerModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>🏆 RACE RESULTS - KẾT QUẢ ĐUA 🏆</h2>
+        <div class="winner-emoji">🐎</div>
+        <h3 id="winnerInfo">...</h3>
+        <p>Winning Horse / Ngựa chiến thắng: <span id="winnerNumber" class="winner-number"></span></p>
+        <div class="winner-details">
+            <p id="winnerDetails">...</p>
+        </div>
+        <button onclick="closeModal()" class="btn btn-blue">Close / Đóng</button>
+    </div>
+</div>
+
+<!-- Connection Status -->
+<div id="connectionStatus" class="connection-status">
+    <span id="statusText">Connecting... / Đang kết nối...</span>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

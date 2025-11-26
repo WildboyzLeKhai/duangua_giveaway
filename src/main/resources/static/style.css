@@ -1,0 +1,50 @@
+:root {
+    --primary: #2c3e50;
+    --accent: #e67e22;
+    --green: #27ae60;
+    --red: #c0392b;
+    --blue: #3498db;
+}
+
+body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; text-align: center; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+.hidden { display: none !important; }
+
+/* LOBBY */
+.card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 50px; }
+.input-lg { padding: 15px; font-size: 18px; width: 80%; margin-bottom: 20px; border: 2px solid #ddd; border-radius: 5px; text-align: center;}
+.lobby-actions { display: flex; justify-content: space-around; align-items: center; margin-top: 20px; }
+.action-group { flex: 1; padding: 20px; }
+.divider { font-weight: bold; color: #999; }
+
+/* GAME ROOM */
+.room-info { background: #fff; padding: 10px; margin-bottom: 15px; border-radius: 5px; display: flex; justify-content: space-between; font-size: 18px; border-bottom: 2px solid var(--primary); }
+.admin-panel { background: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 2px dashed var(--primary); }
+
+/* BUTTONS & INPUTS */
+.btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; color: white; font-weight: bold; font-size: 16px; transition: 0.2s; }
+.btn:hover { transform: translateY(-2px); opacity: 0.9; }
+.btn-blue { background: var(--blue); }
+.btn-green { background: var(--green); }
+.btn-red { background: var(--red); }
+input { padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+
+/* GRID */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
+.horse-card { background: white; border: 2px solid #ddd; border-radius: 8px; padding: 10px; cursor: pointer; transition: 0.2s; }
+.horse-card:hover { transform: scale(1.05); border-color: var(--accent); }
+.horse-card.taken { background: var(--red); color: white; border-color: var(--red); cursor: not-allowed; }
+.horse-emoji { font-size: 24px; }
+.horse-id { font-weight: bold; }
+
+/* TRACK */
+.track-container { background: #34495e; padding: 20px; border-radius: 8px; overflow-y: auto; max-height: 70vh; }
+.track-lane { height: 40px; border-bottom: 1px dashed #7f8c8d; position: relative; margin-bottom: 5px; }
+.finish-line { position: absolute; right: 20px; top: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(45deg, #fff, #fff 10px, #000 10px, #000 20px); z-index: 1; }
+.racer { position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 24px; z-index: 2; white-space: nowrap;}
+
+/* MODAL */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 100; }
+.modal-content { background: white; padding: 40px; border-radius: 10px; text-align: center; animation: pop 0.3s; }
+@keyframes pop { from {transform: scale(0.5);} to {transform: scale(1);} }
+.winner-emoji { font-size: 60px; }
