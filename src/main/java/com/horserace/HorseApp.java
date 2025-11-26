@@ -278,6 +278,83 @@ class GameController {
         messagingTemplate.convertAndSend("/topic/room/" + req.getRoomId() + "/game.reset", "RESET");
         return "OK";
     }
+    // Import dữ liệu đầy đủ từ SQL
+    @PostMapping("/import-full-data")
+    @Transactional
+    public String importFullData() {
+        try {
+            // Xóa dữ liệu cũ
+            horseRepository.deleteAll();
+            roomRepository.deleteAll();
+
+            // Tạo room
+            Room room = new Room("2322", "wild", true);
+            roomRepository.save(room);
+
+            // Tạo danh sách 50 horses theo đúng SQL
+            List<Horse> horses = Arrays.asList(
+                    new Horse(null, 1, "2322", "AVAILABLE", null),
+                    new Horse(null, 2, "2322", "AVAILABLE", null),
+                    new Horse(null, 3, "2322", "AVAILABLE", null),
+                    new Horse(null, 4, "2322", "AVAILABLE", null),
+                    new Horse(null, 5, "2322", "AVAILABLE", null),
+                    new Horse(null, 6, "2322", "AVAILABLE", null),
+                    new Horse(null, 7, "2322", "AVAILABLE", null),
+                    new Horse(null, 8, "2322", "AVAILABLE", null),
+                    new Horse(null, 9, "2322", "AVAILABLE", null),
+                    new Horse(null, 10, "2322", "AVAILABLE", null),
+                    new Horse(null, 11, "2322", "AVAILABLE", null),
+                    new Horse(null, 12, "2322", "AVAILABLE", null),
+                    new Horse(null, 13, "2322", "AVAILABLE", null),
+                    new Horse(null, 14, "2322", "AVAILABLE", null),
+                    new Horse(null, 15, "2322", "AVAILABLE", null),
+                    new Horse(null, 16, "2322", "AVAILABLE", null),
+                    new Horse(null, 17, "2322", "AVAILABLE", null),
+                    new Horse(null, 18, "2322", "AVAILABLE", null),
+                    new Horse(null, 19, "2322", "AVAILABLE", null),
+                    new Horse(null, 20, "2322", "AVAILABLE", null),
+                    new Horse(null, 21, "2322", "AVAILABLE", null),
+                    new Horse(null, 22, "2322", "AVAILABLE", null),
+                    new Horse(null, 23, "2322", "AVAILABLE", null),
+                    new Horse(null, 24, "2322", "AVAILABLE", null),
+                    new Horse(null, 25, "2322", "AVAILABLE", null),
+                    new Horse(null, 26, "2322", "AVAILABLE", null),
+                    new Horse(null, 27, "2322", "AVAILABLE", null),
+                    new Horse(null, 28, "2322", "AVAILABLE", null),
+                    new Horse(null, 29, "2322", "TAKEN", "wild"),  // Ngựa số 29 đã được chọn
+                    new Horse(null, 30, "2322", "AVAILABLE", null),
+                    new Horse(null, 31, "2322", "AVAILABLE", null),
+                    new Horse(null, 32, "2322", "AVAILABLE", null),
+                    new Horse(null, 33, "2322", "AVAILABLE", null),
+                    new Horse(null, 34, "2322", "AVAILABLE", null),
+                    new Horse(null, 35, "2322", "AVAILABLE", null),
+                    new Horse(null, 36, "2322", "AVAILABLE", null),
+                    new Horse(null, 37, "2322", "AVAILABLE", null),
+                    new Horse(null, 38, "2322", "AVAILABLE", null),
+                    new Horse(null, 39, "2322", "AVAILABLE", null),
+                    new Horse(null, 40, "2322", "AVAILABLE", null),
+                    new Horse(null, 41, "2322", "AVAILABLE", null),
+                    new Horse(null, 42, "2322", "AVAILABLE", null),
+                    new Horse(null, 43, "2322", "AVAILABLE", null),
+                    new Horse(null, 44, "2322", "AVAILABLE", null),
+                    new Horse(null, 45, "2322", "AVAILABLE", null),
+                    new Horse(null, 46, "2322", "AVAILABLE", null),
+                    new Horse(null, 47, "2322", "AVAILABLE", null),
+                    new Horse(null, 48, "2322", "AVAILABLE", null),
+                    new Horse(null, 49, "2322", "AVAILABLE", null),
+                    new Horse(null, 50, "2322", "AVAILABLE", null)
+            );
+
+            horseRepository.saveAll(horses);
+
+            return "Import thành công! Đã import đầy đủ:\n" +
+                    "- Phòng: 2322 (Admin: wild, Đang đua: true)\n" +
+                    "- 50 con ngựa (Ngựa số 29 đã được chọn bởi wild)\n" +
+                    "- Dữ liệu đầy đủ từ database local";
+        } catch (Exception e) {
+            return "Import thất bại: " + e.getMessage();
+        }
+    }
 }
 
 //
