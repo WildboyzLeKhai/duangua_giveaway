@@ -278,7 +278,11 @@ class GameController {
         messagingTemplate.convertAndSend("/topic/room/" + req.getRoomId() + "/game.reset", "RESET");
         return "OK";
     }
+<<<<<<< HEAD
     // Import dữ liệu đầy đủ từ SQL
+=======
+     // Import dữ liệu đầy đủ từ SQL
+>>>>>>> 5cd32bf6ad52b4f6f2ccf65694ff4b865c7119dd
     @PostMapping("/import-full-data")
     @Transactional
     public String importFullData() {
